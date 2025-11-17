@@ -109,8 +109,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public UserDto deleteUser(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        UserDto userDto = getUserByID(id);
+        if (userDto != null) {
+            jdbcTemplateUpdate.update(
+                    "DELETE FROM users WHERE ID = ?",
+                    id);
+        }
+        return userDto;
     }
 
 }
