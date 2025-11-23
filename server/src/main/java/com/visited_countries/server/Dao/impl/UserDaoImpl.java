@@ -108,14 +108,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserDto deleteUser(int id) {
-        UserDto userDto = getUserByID(id);
-        if (userDto != null) {
-            jdbcTemplateUpdate.update(
-                    "DELETE FROM users WHERE ID = ?",
-                    id);
-        }
-        return userDto;
+    public Boolean deleteUser(int id) {
+        int rows = jdbcTemplateUpdate.update("DELETE FROM users WHERE `ID` = ?", id);
+
+        return rows > 0;
     }
 
 }

@@ -26,17 +26,17 @@ public class UserService {
 
         // Check if user already exists
         Boolean userEmailExist = userDao.getUserByEmail(userDto.getEmail()) != null;
-        if(userEmailExist) {
+        if (userEmailExist) {
             throw new RuntimeException("This email address is already registered.");
         }
 
         Boolean userMobileExist = userDao.getUserByMobile(userDto.getMobile()) != null;
-        if(userMobileExist) {
+        if (userMobileExist) {
             throw new RuntimeException("This mobile number is already registered.");
         }
 
         Boolean userIdExist = userDao.getUserByID(userDto.getId()) != null;
-        if(userIdExist) {
+        if (userIdExist) {
             throw new RuntimeException("User with ID " + userDto.getId() + " already exists.");
         }
 
@@ -45,5 +45,13 @@ public class UserService {
 
         return userDao.createUser(userDto);
     }
-    
+
+    public Boolean deleteUser(int id) {
+        if (userDao.getUserByID(id) == null) {
+            throw new RuntimeException("This user doesn't exist.");
+        }
+
+        return userDao.deleteUser(id);
+    }
+
 }

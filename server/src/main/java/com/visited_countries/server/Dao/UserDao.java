@@ -9,5 +9,5 @@ public interface UserDao {
     UserDto getUserByEmail(String email);
     UserDto getUserByMobile(String mobile);
 
-    UserDto deleteUser(int id);
+    Boolean deleteUser(int id);
 }
